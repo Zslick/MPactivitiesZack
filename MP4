@@ -99,8 +99,4 @@ section .text
         msg4 db 'z'      
 
 
-;sudo apt-get update
-;sudo apt-get -y install nasm
-;nasm -f elf mp4.asm
-;ld -m  elf_i386 mp4.o -o mp4
-;./mp3
+
