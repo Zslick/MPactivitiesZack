@@ -1,1 +1,61 @@
 
+section .data
+    newline db 10
+
+section .bss
+    buffer resb 1
+
+section .text
+    global _start
+
+_start:
+    
+    get_char:
+        mov eax, 3          
+        mov ebx, 0          
+        mov ecx, buffer    
+        mov edx, 1          
+        int 0x80
+
+       
+        cmp byte [buffer], 'a'
+        jl not_lower
+        cmp byte [buffer], 'z'
+        jg not_lower
+
+       
+        sub byte [buffer], 0x20
+
+        jmp print_char
+
+    not_lower:
+        
+        cmp byte [buffer], 'A'
+        jl print_char
+        cmp byte [buffer], 'Z'
+        jg print_char
+
+        
+
+        add byte [buffer], 0x20
+
+    print_char:
+        mov eax, 4      
+        mov ebx, 1
+        mov ecx, buffer
+        mov edx, 1
+        int 0x80
+
+    mov eax, 4           
+        mov ebx, 1          
+        mov ecx, newline     
+        mov edx, 1           
+        int 0x80   
+
+
+    mov eax, 1
+    mov ebx, 0
+    int 0x80
+
+
+    
